@@ -1,0 +1,19 @@
+---
+- name: update index.html and restart apache service
+  hosts: ubuntu
+  become: yes
+  tasks:
+    - name: Update index.html but copyping
+      copy:
+        src: /root/index.html
+        dest: /var/www/html
+        owner: root
+        group: root
+        mode: 0644 
+      notify:
+        - restart apache in ubuntu
+  handlers: 
+    - name: restart apache in ubuntu
+      service:
+        name: apache2
+        state: restarted

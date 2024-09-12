@@ -1,0 +1,13 @@
+---
+- name: Uninstall nginx in ubuntu
+  hosts: ubuntu
+  become: yes
+  tasks:
+    - name: Stop nginx
+      service:
+        name: nginx
+        state: stopped
+    - name: Uninstall nginx
+      apt: 
+        name: nginx
+        state: absent

@@ -1,0 +1,28 @@
+---
+- name: Install nginx in ubuntu
+  hosts: ubuntu
+  become: yes
+  tasks: 
+    - name: update apt
+      apt:
+        update_cache: yes        
+    - name: install nginx
+      apt:
+        name: nginx
+        state: present        
+    - name: install apache
+      apt:
+        name: apache2
+        state: present
+    - name: install java
+      apt:
+        name: default-jdk
+        state: present
+    - name: install mysql-server
+      apt:
+        name: mysql-server
+        state: present
+
+               
+
+

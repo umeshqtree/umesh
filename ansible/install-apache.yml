@@ -1,0 +1,26 @@
+---
+- name: uninstall apache
+  hosts: all
+  become: yes
+  tasks:
+    - name: stop apache service
+      service:
+        name: apache2
+        state: stopped  
+      when: ansible_distribution == 'Ubuntu' 
+    - name: uninstall apache in ubuntu
+      apt:
+        name: apache2
+        state: absent
+      when: ansible_distribution == 'Ubuntu'
+    - name: stop apache service
+      service:
+        name: httpd
+        state: stopped  
+      when: ansible_distribution == 'Amazon'
+    - name: uninstall apache in Amazon
+      yum:
+        name: httpd
+        state: absent
+      when: ansible_distribution == 'Amazon'
+    
