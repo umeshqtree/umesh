@@ -1,1 +1,8 @@
-HAHA!!! deleted
+create ubuntu container
+apt update
+apt install apache2
+apt install default-jdk
+mkdir /data
+touch /data/qtree-secrets.txt
+copy index.html to /var/www/html
+start apache2 service
