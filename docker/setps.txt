@@ -5,4 +5,4 @@ apt install default-jdk
 mkdir /data
 touch /data/qtree-secrets.txt
 copy index.html to /var/www/html
-start apache service
+start httpd service
