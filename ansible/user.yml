@@ -1,0 +1,10 @@
+---
+- name: create file in remote
+  hosts: all
+  become: yes
+  tasks:
+    - name: Create ansible user
+      user:
+       name: ansible_user
+       password: "{{ 'qtree@123' | password_hash('sha512') }}"      
+      

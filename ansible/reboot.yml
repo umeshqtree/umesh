@@ -1,0 +1,8 @@
+---
+- name: Reboot Linux Servers
+  hosts: all
+  become: yes
+  tasks:
+    - name: Reboot the server
+      reboot:
+        reboot_timeout: 600
