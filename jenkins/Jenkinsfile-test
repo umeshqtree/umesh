@@ -1,0 +1,32 @@
+pipeline{
+    agent any
+    environment {
+        GIT_REPO_URL = 'https://github.com/umeshqtree/umesh.git' //update repository
+        ANSIBLE_DIR = "/var/lib/jenkins/workspace/qtree_ansible/ansible/" //update folder name
+    }
+    parameters {
+        choice(name: 'Ansible_playbook', choices: ['install-apache.yml','uninstall-apache.yml','reboot.yml'], description: 'Select playbook')
+    }
+    stages {
+    stage('Git pull') {
+        steps {
+         // Checkout the code from your Git repository and change the branch name
+            checkout([$class: 'GitSCM', branches: [[name: '*/new']], userRemoteConfigs: [[url: env.GIT_REPO_URL]]])
+         }
+        }
+        stage('Modify pem file permission') {
+        steps {
+             dir("${env.ANSIBLE_DIR}"){
+          sh "sudo chmod 400 swetha.pem" //update your pem file name
+             }
+         }
+        }
+        stage('Execute the pipeline') {
+            steps {
+                dir("${env.ANSIBLE_DIR}") {
+                    sh "sudo ansible-playbook -i inventory ${params.Ansible_playbook} -b" //update playbook name
+                }
+            }
+        }
+}
+}
