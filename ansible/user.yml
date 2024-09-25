@@ -5,6 +5,6 @@
   tasks:
     - name: Create ansible user
       user:
-       name: umesh
+       name: test2
        password: "{{ 'qtree@123' | password_hash('sha512') }}"      
       
